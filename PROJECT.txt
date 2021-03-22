@@ -1,0 +1,1377 @@
+CREATE TABLE  University (
+	university_id DECIMAL (20) PRIMARY KEY not null,
+	university_name VARCHAR (36) not null,
+	university_start_date DATE not null
+);
+
+INSERT INTO University (university_id, university_name, university_start_date) VALUES (5555555555, 'AITU (ASTANA IT UNIVERSITY)', '09/01/2019');
+SELECT * FROM University;
+
+
+CREATE TABLE Dean (
+	dean_id DECIMAL (20) PRIMARY KEY not null,
+	dean_name VARCHAR (36) not null,
+	dean_surname VARCHAR (36) not null,
+	dean_gender VARCHAR(10) not null,
+	dean_salary INT not null,
+	university_id DECIMAL (20) REFERENCES University (university_id)
+);
+
+ALTER TABLE Dean ADD COLUMN Deputy_Dean VARCHAR (36);
+ALTER TABLE Dean ADD COLUMN tel DECIMAL (11), ADD COLUMN dean_email VARCHAR (36);
+
+
+
+INSERT INTO Dean (dean_id, dean_name, dean_surname, dean_gender, dean_salary, university_id, Deputy_Dean, tel, dean_email) 
+VALUES (10001, 'Muslim', 'Sergaziev', 'male', 1000, 5555555555, 'Khaimuldin Nursultan', 87172645706, 'muslim.sergaziyev@astanait.edu.kz');  
+select * from Dean;
+
+CREATE TABLE Rector (
+	rector_id DECIMAL (20) PRIMARY KEY not null,
+	rector_name VARCHAR (36) not null,
+	rector_surname VARCHAR (36) not null,
+	rectot_gender VARCHAR(10) not null,
+	rector_salary INT not null,
+	dean_id DECIMAL (20) REFERENCES  Dean (dean_id ) not null,
+	university_id DECIMAL (20) REFERENCES University (university_id)
+);
+
+ALTER TABLE Rector ADD COLUMN rector_email VARCHAR (36);
+
+INSERT INTO Rector (rector_id, rector_name, rector_surname, rectot_gender, rector_salary, dean_id, university_id, rector_email)
+VALUES (10011, 'Serik', 'Omirbaev', 'male', 1500, 10001, 5555555555, 'n.khaimuldin@astanait.edu.kz');  
+
+select * from Rector;
+
+
+
+CREATE TABLE Major (
+	major_id DECIMAL (20) PRIMARY KEY not null,
+	major_name VARCHAR (36) not null
+);
+
+INSERT INTO Major (major_id, major_name) VALUES (1001, 'Computer Science'), (1002, 'Digital Journalism'), 
+(1003, 'Industrial Automation'), (1004, 'Software Engineering'), (1005, 'Cybersecurity'), (1006, 'Media Technologies'), (1007, 'Big Data Analysis'),
+(1008, 'Telecommunication Systems'), (1009, 'IT-management');
+
+select * from Major;
+
+
+
+CREATE TABLE Subject (
+	subject_id DECIMAL (20) PRIMARY KEY not null,
+	subject_name VARCHAR (36) not null
+);
+
+INSERT INTO Subject (subject_id, subject_name) VALUES (221, 'History'), (222, 'ICT'), (223, 'Calculus'), (224, 'C++'), (225, 'Psyphical Education'), 
+(226, 'Java'), (227, 'Python'), (228, 'CyberSecurity'), (229, 'Hacking ');
+
+select * from Subject;
+
+
+CREATE TABLE Student (
+	student_id DECIMAL (20) PRIMARY KEY not null,
+	student_name VARCHAR (36) not null,
+	student_surname VARCHAR (36) not null,
+	student_gender VARCHAR(10) not null,
+	student_year INT not null,
+	student_GPA INT not null,
+	major_id DECIMAL (20) REFERENCES Major (major_id) not null
+);
+
+ALTER TABLE Student ADD COLUMN s_email VARCHAR (50);
+
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (4441, 'Lyn', 'Harmour', 'lharmour0@digg.com', 'Female', 3, 4, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (4442, 'Elvin', 'Aberdalgy', 'eaberdalgy1@npr.org', 'Male', 2, 3, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (4443, 'Bernarr', 'Pahler', 'bpahler2@t.co', 'Male', 1, 4, 1004); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (4444, 'Ahmad', 'Polglase', 'apolglase3@archive.org', 'Male', 3, 2, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (4445, 'Maurizio', 'Nel', 'mnel4@redcross.org', 'Male', 1, 3, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (4446, 'Marlow', 'Gasgarth', 'mgasgarth5@sciencedirect.com', 'Male', 2, 4, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (4447, 'Esmaria', 'Cullity', 'ecullity6@prweb.com', 'Female', 3, 4, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (4448, 'Dwight', 'Willford', 'dwillford7@weibo.com', 'Male', 3, 3, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (4449, 'Link', 'Pappi', 'lpappi8@accuweather.com', 'Male', 2, 3, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44410, 'Gigi', 'Bellison', 'gbellison9@hud.gov', 'Female', 2, 3, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44411, 'Olimpia', 'Le-Good', 'olegooda@epa.gov', 'Female', 1, 3, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44412, 'Bink', 'Ganderton', 'bgandertonb@ca.gov', 'Male', 2, 4, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44413, 'Royce', 'Grosvener', 'rgrosvenerc@pagesperso-orange.fr', 'Male', 1, 4, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44414, 'Lyman', 'Scocroft', 'lscocroftd@earthlink.net', 'Male', 2, 4, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44415, 'Carlota', 'Dunphie', 'cdunphiee@vk.com', 'Female', 2, 3, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44416, 'Annora', 'Lowrey', 'alowreyf@amazon.com', 'Female', 2, 2, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44417, 'Tremayne', 'Sawell', 'tsawellg@oakley.com', 'Male', 1, 4, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44418, 'Winne', 'Odby', 'wodbyh@squidoo.com', 'Female', 2, 3, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44419, 'Zita', 'Nanelli', 'znanellii@cafepress.com', 'Female', 3, 2, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44420, 'Selestina', 'Dinnage', 'sdinnagej@newsvine.com', 'Female', 2, 4, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44421, 'Fanni', 'Espley', 'fespleyk@java.com', 'Female', 2, 3, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44422, 'Lon', 'Duffield', 'lduffieldl@stanford.edu', 'Male', 2, 4, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44423, 'Earle', 'Trim', 'etrimm@naver.com', 'Male', 2, 4, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44424, 'Ailina', 'Woodnutt', 'awoodnuttn@feedburner.com', 'Female', 1, 4, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44425, 'Torie', 'Fawke', 'tfawkeo@wikimedia.org', 'Female', 2, 3, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44426, 'Titus', 'Ebbens', 'tebbensp@ustream.tv', 'Male', 2, 2, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44427, 'Merry', 'Armiger', 'marmigerq@unc.edu', 'Male', 3, 4, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44428, 'Tallou', 'Lanchester', 'tlanchesterr@barnesandnoble.com', 'Female', 1, 2, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44429, 'Bryon', 'Dugood', 'bdugoods@foxnews.com', 'Male', 3, 2, 1004); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44430, 'Berkie', 'Androletti', 'bandrolettit@google.de', 'Male', 1, 3, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44431, 'Theressa', 'Free', 'tfreeu@drupal.org', 'Female', 2, 3, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44432, 'Virgil', 'Wardall', 'vwardallv@de.vu', 'Male', 1, 4, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44433, 'Yehudi', 'Linton', 'ylintonw@instagram.com', 'Male', 2, 4, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44434, 'Jess', 'Fleote', 'jfleotex@earthlink.net', 'Male', 2, 3, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44435, 'Lacee', 'Bertson', 'lbertsony@oaic.gov.au', 'Female', 1, 2, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44436, 'Emanuel', 'Umfrey', 'eumfreyz@businesswire.com', 'Male', 3, 4, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44437, 'Raffaello', 'Axworthy', 'raxworthy10@bing.com', 'Male', 1, 2, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44438, 'Maribeth', 'Vedstra', 'mvedstra11@elpais.com', 'Female', 1, 2, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44439, 'Laurence', 'Newcombe', 'lnewcombe12@bbc.co.uk', 'Male', 2, 3, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44440, 'Biddy', 'Grafton-Herbert', 'bgraftonherbert13@cargocollective.com', 'Female', 2, 4, 1004); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44441, 'Arden', 'Cracknell', 'acracknell14@spiegel.de', 'Female', 1, 4, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44442, 'Ollie', 'Pancast', 'opancast15@army.mil', 'Male', 3, 4, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44443, 'Eliza', 'Ortiger', 'eortiger16@skype.com', 'Female', 2, 4, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44444, 'Johan', 'Diter', 'jditer17@gizmodo.com', 'Male', 1, 3, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44445, 'James', 'Smail', 'jsmail18@naver.com', 'Male', 1, 4, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44446, 'Helaina', 'Celli', 'hcelli19@acquirethisname.com', 'Female', 1, 4, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44447, 'Norton', 'Casino', 'ncasino1a@deviantart.com', 'Male', 3, 4, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44448, 'Rusty', 'Livoir', 'rlivoir1b@yahoo.co.jp', 'Male', 1, 3, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44449, 'Deva', 'Bigley', 'dbigley1c@disqus.com', 'Female', 3, 2, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44450, 'Dario', 'Geri', 'dgeri1d@usnews.com', 'Male', 1, 3, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44451, 'Tabbatha', 'Ronaldson', 'tronaldson1e@delicious.com', 'Female', 3, 2, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44452, 'Cynde', 'Milesop', 'cmilesop1f@lycos.com', 'Female', 2, 2, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44453, 'Ezri', 'Cowup', 'ecowup1g@webmd.com', 'Male', 1, 2, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44454, 'Tallie', 'Vesque', 'tvesque1h@flavors.me', 'Female', 2, 2, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44455, 'Casi', 'Howlings', 'chowlings1i@redcross.org', 'Female', 3, 2, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44456, 'Griz', 'Alflat', 'galflat1j@tiny.cc', 'Male', 1, 2, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44457, 'Thorin', 'Mahaffey', 'tmahaffey1k@zimbio.com', 'Male', 3, 3, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44458, 'Jayme', 'Grundey', 'jgrundey1l@china.com.cn', 'Male', 3, 4, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44459, 'Charlton', 'Crowter', 'ccrowter1m@ustream.tv', 'Male', 2, 4, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44460, 'Saxe', 'Hollyar', 'shollyar1n@columbia.edu', 'Male', 3, 2, 1004); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44461, 'Kayley', 'Obin', 'kobin1o@com.com', 'Female', 3, 4, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44462, 'Kathie', 'Aikin', 'kaikin1p@time.com', 'Female', 2, 4, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44463, 'Batholomew', 'Giblin', 'bgiblin1q@about.me', 'Male', 3, 2, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44464, 'Ab', 'Broadhead', 'abroadhead1r@indiegogo.com', 'Male', 2, 3, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44465, 'Aindrea', 'Dimanche', 'adimanche1s@facebook.com', 'Female', 1, 4, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44466, 'Aldis', 'Kearns', 'akearns1t@nationalgeographic.com', 'Male', 2, 2, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44467, 'Sheila', 'Seabrocke', 'sseabrocke1u@simplemachines.org', 'Female', 2, 3, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44468, 'Eberto', 'Alvis', 'ealvis1v@angelfire.com', 'Male', 1, 2, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44469, 'Yettie', 'Akhurst', 'yakhurst1w@slideshare.net', 'Female', 3, 2, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44470, 'Alwyn', 'Fitzsimon', 'afitzsimon1x@baidu.com', 'Male', 3, 4, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44471, 'Daffi', 'Spaxman', 'dspaxman1y@dagondesign.com', 'Female', 3, 3, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44472, 'Myriam', 'Ivasechko', 'mivasechko1z@com.com', 'Female', 3, 2, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44473, 'Fredi', 'Corthes', 'fcorthes20@gnu.org', 'Female', 2, 4, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44474, 'Linzy', 'Gullivan', 'lgullivan21@senate.gov', 'Female', 3, 4, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44475, 'Glyn', 'Sloane', 'gsloane22@hhs.gov', 'Male', 3, 2, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44476, 'Gene', 'Vickerman', 'gvickerman23@weibo.com', 'Male', 2, 3, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44477, 'Pearl', 'Bambery', 'pbambery24@army.mil', 'Female', 3, 4, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44478, 'Ainsley', 'Bartolomeu', 'abartolomeu25@etsy.com', 'Female', 1, 4, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44479, 'Devonna', 'Klimshuk', 'dklimshuk26@wikia.com', 'Female', 2, 3, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44480, 'Masha', 'Saltmarshe', 'msaltmarshe27@qq.com', 'Female', 1, 2, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44481, 'Courtney', 'McKerton', 'cmckerton28@unicef.org', 'Female', 2, 2, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44482, 'Lanny', 'O''Brogane', 'lobrogane29@tmall.com', 'Male', 2, 2, 1004); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44483, 'Smith', 'Copozio', 'scopozio2a@php.net', 'Male', 1, 4, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44484, 'Ring', 'Nanson', 'rnanson2b@exblog.jp', 'Male', 3, 4, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44485, 'Alena', 'Reader', 'areader2c@list-manage.com', 'Female', 2, 4, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44486, 'Coleen', 'Stienham', 'cstienham2d@webmd.com', 'Female', 2, 3, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44487, 'Anna-diane', 'Dean', 'adean2e@dot.gov', 'Female', 2, 4, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44488, 'Nada', 'Rushmere', 'nrushmere2f@woothemes.com', 'Female', 3, 3, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44489, 'Pebrook', 'Corbyn', 'pcorbyn2g@cocolog-nifty.com', 'Male', 3, 2, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44490, 'Stewart', 'Kollaschek', 'skollaschek2h@google.co.jp', 'Male', 2, 2, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44491, 'Zabrina', 'Viant', 'zviant2i@imgur.com', 'Female', 1, 4, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44492, 'Stavros', 'Sauvain', 'ssauvain2j@craigslist.org', 'Male', 2, 3, 1004); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44493, 'Faun', 'Kubicki', 'fkubicki2k@bravesites.com', 'Female', 3, 3, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44494, 'Shaun', 'Tresvina', 'stresvina2l@sciencedaily.com', 'Male', 1, 4, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44495, 'Dusty', 'Scholey', 'dscholey2m@surveymonkey.com', 'Female', 1, 3, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44496, 'Claiborne', 'Crass', 'ccrass2n@digg.com', 'Male', 2, 2, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44497, 'Gunilla', 'Peete', 'gpeete2o@elpais.com', 'Female', 3, 2, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44498, 'Quillan', 'Diament', 'qdiament2p@macromedia.com', 'Male', 2, 3, 1004); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44499, 'Di', 'Bracknall', 'dbracknall2q@sourceforge.net', 'Female', 1, 4, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444100, 'Talyah', 'Kneale', 'tkneale2r@mlb.com', 'Female', 1, 4, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444101, 'Lorenza', 'Sammon', 'lsammon2s@google.pl', 'Female', 3, 4, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444102, 'Noah', 'Watsam', 'nwatsam2t@google.pl', 'Male', 3, 2, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444103, 'Sherman', 'Drake', 'sdrake2u@reference.com', 'Male', 2, 4, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444104, 'Tudor', 'Mulbery', 'tmulbery2v@intel.com', 'Male', 3, 4, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444105, 'Gardiner', 'Parcell', 'gparcell2w@mozilla.org', 'Male', 3, 2, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444106, 'Kara', 'Hardinge', 'khardinge2x@hugedomains.com', 'Female', 2, 4, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444107, 'Ash', 'Haldon', 'ahaldon2y@myspace.com', 'Male', 2, 2, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444108, 'Avivah', 'MacGiffin', 'amacgiffin2z@rakuten.co.jp', 'Female', 1, 4, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444109, 'Louisette', 'Farryann', 'lfarryann30@ed.gov', 'Female', 2, 4, 1004); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444110, 'Raff', 'Krysztowczyk', 'rkrysztowczyk31@wikia.com', 'Male', 2, 3, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444111, 'Concordia', 'Dicke', 'cdicke32@sohu.com', 'Female', 1, 2, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444112, 'Daniele', 'Skym', 'dskym33@unicef.org', 'Female', 2, 2, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444113, 'Liana', 'Benoiton', 'lbenoiton34@scientificamerican.com', 'Female', 1, 4, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444114, 'Blisse', 'Coules', 'bcoules35@technorati.com', 'Female', 1, 4, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444115, 'Boothe', 'Cheese', 'bcheese36@forbes.com', 'Male', 3, 4, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444116, 'Bekki', 'Pickrell', 'bpickrell37@about.com', 'Female', 3, 4, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444117, 'Hayden', 'Zmitrichenko', 'hzmitrichenko38@amazon.de', 'Male', 2, 4, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444118, 'Lily', 'Korous', 'lkorous39@cnn.com', 'Female', 3, 2, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444119, 'Julita', 'Gullane', 'jgullane3a@google.ca', 'Female', 1, 4, 1004); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444120, 'Phebe', 'Ridolfo', 'pridolfo3b@blog.com', 'Female', 3, 2, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444121, 'Krystal', 'Erratt', 'kerratt3c@nih.gov', 'Female', 2, 4, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444122, 'Jamison', 'Roostan', 'jroostan3d@nationalgeographic.com', 'Male', 1, 4, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444123, 'Sherry', 'Martindale', 'smartindale3e@yahoo.com', 'Female', 3, 3, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444124, 'Eryn', 'Loffhead', 'eloffhead3f@dyndns.org', 'Female', 3, 2, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444125, 'Obed', 'Cane', 'ocane3g@myspace.com', 'Male', 2, 3, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444126, 'Lin', 'Pember', 'lpember3h@miibeian.gov.cn', 'Male', 1, 3, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444127, 'Edithe', 'Courtois', 'ecourtois3i@godaddy.com', 'Female', 3, 3, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444128, 'Deirdre', 'Sabati', 'dsabati3j@canalblog.com', 'Female', 2, 4, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444129, 'Batsheva', 'Visick', 'bvisick3k@oracle.com', 'Female', 3, 4, 1004); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444130, 'Hildy', 'Walasik', 'hwalasik3l@simplemachines.org', 'Female', 3, 4, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444131, 'Ebba', 'Lakes', 'elakes3m@uol.com.br', 'Female', 3, 3, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444132, 'Jacquelyn', 'Brew', 'jbrew3n@fema.gov', 'Female', 2, 4, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444133, 'Rubi', 'Baldoni', 'rbaldoni3o@businessweek.com', 'Female', 2, 2, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444134, 'Kaycee', 'Kenright', 'kkenright3p@cbc.ca', 'Female', 3, 2, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444135, 'Una', 'Hancell', 'uhancell3q@shareasale.com', 'Female', 3, 4, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444136, 'Terza', 'Kearle', 'tkearle3r@sakura.ne.jp', 'Female', 3, 4, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444137, 'Ruby', 'Backshall', 'rbackshall3s@flavors.me', 'Male', 3, 2, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444138, 'Melli', 'Littlefair', 'mlittlefair3t@shinystat.com', 'Female', 1, 3, 1004); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444139, 'Ciro', 'Carswell', 'ccarswell3u@ameblo.jp', 'Male', 3, 2, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444140, 'Cris', 'Heathcote', 'cheathcote3v@usda.gov', 'Male', 1, 4, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444141, 'Moshe', 'McAree', 'mmcaree3w@e-recht24.de', 'Male', 1, 4, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444142, 'Ellerey', 'Ivoshin', 'eivoshin3x@state.gov', 'Male', 3, 2, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444143, 'Gretta', 'Kellet', 'gkellet3y@parallels.com', 'Female', 3, 2, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444144, 'Gearalt', 'Matthessen', 'gmatthessen3z@prnewswire.com', 'Male', 3, 4, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444145, 'Pansie', 'Valentino', 'pvalentino40@foxnews.com', 'Female', 3, 4, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444146, 'Normy', 'Harris', 'nharris41@upenn.edu', 'Male', 1, 4, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444147, 'Maxim', 'Leeke', 'mleeke42@dot.gov', 'Male', 1, 2, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444148, 'Evangelin', 'Stretton', 'estretton43@wired.com', 'Female', 1, 4, 1004); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444149, 'Lulita', 'Eveque', 'leveque44@networksolutions.com', 'Female', 3, 4, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444150, 'Brittni', 'Tiffin', 'btiffin45@cdc.gov', 'Female', 3, 2, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444151, 'Lindie', 'Gauthorpp', 'lgauthorpp46@furl.net', 'Female', 2, 3, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444152, 'Robert', 'Bengefield', 'rbengefield47@weather.com', 'Male', 2, 3, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444153, 'Clementina', 'Guterson', 'cguterson48@cafepress.com', 'Female', 2, 3, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444154, 'Cory', 'Tivolier', 'ctivolier49@theatlantic.com', 'Male', 3, 4, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444155, 'Flory', 'Lawty', 'flawty4a@gov.uk', 'Male', 2, 3, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444156, 'Toma', 'Greenier', 'tgreenier4b@wix.com', 'Female', 1, 3, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444157, 'Belvia', 'Lello', 'blello4c@ebay.com', 'Female', 1, 4, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444158, 'Pearce', 'Kimbley', 'pkimbley4d@diigo.com', 'Male', 3, 4, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444159, 'Rafaelia', 'Clemenzi', 'rclemenzi4e@printfriendly.com', 'Female', 1, 2, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444160, 'Mary', 'Elcy', 'melcy4f@unesco.org', 'Female', 2, 2, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444161, 'Chaddie', 'Zielinski', 'czielinski4g@wsj.com', 'Male', 2, 2, 1004); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444162, 'Wandis', 'Adicot', 'wadicot4h@hostgator.com', 'Female', 1, 4, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444163, 'Erwin', 'Witard', 'ewitard4i@hibu.com', 'Male', 2, 2, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444164, 'Gretna', 'Dobrovsky', 'gdobrovsky4j@sphinn.com', 'Female', 3, 2, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444165, 'Modesta', 'Jentin', 'mjentin4k@elegantthemes.com', 'Female', 2, 3, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444166, 'Felicio', 'Gelder', 'fgelder4l@msu.edu', 'Male', 3, 2, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444167, 'Godart', 'Martinolli', 'gmartinolli4m@behance.net', 'Male', 1, 4, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444168, 'Myrta', 'Cassey', 'mcassey4n@domainmarket.com', 'Female', 3, 3, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444169, 'Allyson', 'Langham', 'alangham4o@icio.us', 'Female', 1, 4, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444170, 'Gerianne', 'Gadsdon', 'ggadsdon4p@ftc.gov', 'Female', 1, 4, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444171, 'Wini', 'Kenyam', 'wkenyam4q@yandex.ru', 'Female', 1, 3, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444172, 'Merrilee', 'Cacacie', 'mcacacie4r@utexas.edu', 'Female', 1, 4, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444173, 'Dominik', 'Heaffey', 'dheaffey4s@columbia.edu', 'Male', 2, 4, 1004); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444174, 'Tobias', 'Ysson', 'tysson4t@nymag.com', 'Male', 1, 2, 1004); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444175, 'Gerri', 'Dicte', 'gdicte4u@cnbc.com', 'Female', 1, 3, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444176, 'Alejandro', 'Mennithorp', 'amennithorp4v@google.es', 'Male', 1, 2, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444177, 'Kareem', 'Dumphrey', 'kdumphrey4w@mit.edu', 'Male', 2, 2, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444178, 'Gilles', 'Fozard', 'gfozard4x@dot.gov', 'Male', 1, 4, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444179, 'Edmon', 'Santacrole', 'esantacrole4y@infoseek.co.jp', 'Male', 2, 3, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444180, 'Jacki', 'Dradey', 'jdradey4z@chronoengine.com', 'Female', 2, 3, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444181, 'Griffie', 'Pask', 'gpask50@quantcast.com', 'Male', 2, 3, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444182, 'Daune', 'Rowdell', 'drowdell51@cyberchimps.com', 'Female', 1, 4, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444183, 'Cozmo', 'Walster', 'cwalster52@live.com', 'Male', 2, 3, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444184, 'Hashim', 'Saffran', 'hsaffran53@usatoday.com', 'Male', 3, 3, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444185, 'Hatti', 'Dwire', 'hdwire54@stumbleupon.com', 'Female', 1, 3, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444186, 'Ramsay', 'Baylie', 'rbaylie55@dot.gov', 'Male', 2, 2, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444187, 'Modesty', 'Hurnell', 'mhurnell56@go.com', 'Female', 2, 3, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444188, 'Giorgia', 'Peasgood', 'gpeasgood57@booking.com', 'Female', 2, 2, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444189, 'Willis', 'Maddern', 'wmaddern58@comsenz.com', 'Male', 1, 3, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444190, 'Sydney', 'Sharpous', 'ssharpous59@blogs.com', 'Female', 2, 4, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444191, 'Paxton', 'Saxton', 'psaxton5a@slideshare.net', 'Male', 3, 4, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444192, 'Myrtie', 'Garford', 'mgarford5b@seesaa.net', 'Female', 3, 2, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444193, 'Giselbert', 'Kingsland', 'gkingsland5c@sphinn.com', 'Male', 1, 3, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444194, 'Ania', 'Mc Carrick', 'amccarrick5d@timesonline.co.uk', 'Female', 1, 4, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444195, 'Adele', 'Eagers', 'aeagers5e@theglobeandmail.com', 'Female', 1, 4, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444196, 'Oran', 'Parkyn', 'oparkyn5f@booking.com', 'Male', 3, 4, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444197, 'Anstice', 'Rubica', 'arubica5g@google.co.jp', 'Female', 1, 4, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444198, 'Haskell', 'Featherston', 'hfeatherston5h@umn.edu', 'Male', 2, 3, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444199, 'Arlie', 'Larroway', 'alarroway5i@kickstarter.com', 'Female', 1, 4, 1004); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444200, 'Klarrisa', 'Fitzmaurice', 'kfitzmaurice5j@ezinearticles.com', 'Female', 2, 3, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444201, 'Walton', 'Fellenor', 'wfellenor5k@freewebs.com', 'Male', 3, 4, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444202, 'Giordano', 'Hache', 'ghache5l@mtv.com', 'Male', 3, 3, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444203, 'Alexandr', 'Hessing', 'ahessing5m@washington.edu', 'Male', 2, 3, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444204, 'Abby', 'Reddihough', 'areddihough5n@purevolume.com', 'Female', 1, 3, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444205, 'Norah', 'Hughesdon', 'nhughesdon5o@harvard.edu', 'Female', 3, 3, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444206, 'Alexine', 'Maudsley', 'amaudsley5p@icq.com', 'Female', 1, 2, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444207, 'Mata', 'Badsey', 'mbadsey5q@networksolutions.com', 'Male', 2, 2, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444208, 'Nicoline', 'Bogue', 'nbogue5r@blogtalkradio.com', 'Female', 1, 4, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444209, 'Tatiana', 'Stute', 'tstute5s@so-net.ne.jp', 'Female', 1, 2, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444210, 'Frederick', 'Mechem', 'fmechem5t@disqus.com', 'Male', 3, 2, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444211, 'Ben', 'St. Pierre', 'bstpierre5u@blogs.com', 'Male', 3, 2, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444212, 'Annadiana', 'Jiruca', 'ajiruca5v@huffingtonpost.com', 'Female', 1, 3, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444213, 'Thorn', 'Ubach', 'tubach5w@google.it', 'Male', 2, 4, 1004); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444214, 'Tawsha', 'Milbourn', 'tmilbourn5x@mapquest.com', 'Female', 2, 2, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444215, 'Loretta', 'Wildor', 'lwildor5y@alexa.com', 'Female', 3, 3, 1004); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444216, 'Wylie', 'Trengrouse', 'wtrengrouse5z@bloglines.com', 'Male', 2, 3, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444217, 'Tressa', 'Tumini', 'ttumini60@youku.com', 'Female', 1, 4, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444218, 'Bondy', 'Olivello', 'bolivello61@delicious.com', 'Male', 1, 3, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444219, 'Tabb', 'Peascod', 'tpeascod62@artisteer.com', 'Male', 1, 2, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444220, 'Wade', 'Habishaw', 'whabishaw63@ezinearticles.com', 'Male', 3, 3, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444221, 'Allis', 'Ducham', 'aducham64@comsenz.com', 'Female', 2, 2, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444222, 'Donnell', 'Feely', 'dfeely65@behance.net', 'Male', 3, 2, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444223, 'Evey', 'Brimming', 'ebrimming66@cam.ac.uk', 'Female', 1, 4, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444224, 'Felicity', 'Weedenburg', 'fweedenburg67@cbslocal.com', 'Female', 3, 2, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444225, 'Pall', 'Gwalter', 'pgwalter68@nydailynews.com', 'Male', 1, 2, 1004); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444226, 'Christoffer', 'Tiptaft', 'ctiptaft69@deviantart.com', 'Male', 1, 3, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444227, 'Gare', 'Gillyatt', 'ggillyatt6a@walmart.com', 'Male', 2, 2, 1004); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444228, 'Gertie', 'Dimitriades', 'gdimitriades6b@vistaprint.com', 'Female', 2, 3, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444229, 'Graham', 'Hendrikse', 'ghendrikse6c@angelfire.com', 'Male', 1, 2, 1004); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444230, 'Freeland', 'Chavez', 'fchavez6d@bing.com', 'Male', 1, 3, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444231, 'Faythe', 'Bazell', 'fbazell6e@hibu.com', 'Female', 2, 3, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444232, 'Rana', 'Liveley', 'rliveley6f@fastcompany.com', 'Female', 2, 3, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444233, 'Rriocard', 'Netting', 'rnetting6g@sohu.com', 'Male', 3, 3, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444234, 'Catherina', 'Brodhead', 'cbrodhead6h@mlb.com', 'Female', 2, 3, 1008);
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444235, 'Caspar', 'Sibery', 'csibery6i@umich.edu', 'Male', 2, 4, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id)
+values (444236, 'Addy', 'Boykett', 'aboykett6j@woothemes.com', 'Female', 3, 2, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (44237, 'Bondon', 'Snufflebottom', 'bsnufflebottom6k@amazon.de', 'Male', 3, 4, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444238, 'Jase', 'Sloane', 'jsloane6l@tiny.cc', 'Male', 1, 2, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444239, 'Audre', 'Slowley', 'aslowley6m@usatoday.com', 'Female', 2, 3, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444240, 'Felicdad', 'Fearnley', 'ffearnley6n@desdev.cn', 'Female', 3, 4, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444241, 'Cordelia', 'McCrory', 'cmccrory6o@163.com', 'Female', 2, 2, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444242, 'Lockwood', 'Stealy', 'lstealy6p@cnbc.com', 'Male', 2, 4, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444243, 'Carena', 'Ucchino', 'cucchino6q@tamu.edu', 'Female', 2, 4, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444244, 'Web', 'Dagg', 'wdagg6r@sohu.com', 'Male', 2, 3, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444245, 'Margarita', 'Pauley', 'mpauley6s@salon.com', 'Female', 2, 3, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444246, 'Padget', 'Carlick', 'pcarlick6t@google.fr', 'Male', 2, 2, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444247, 'Ines', 'Earthfield', 'iearthfield6u@ezinearticles.com', 'Female', 1, 2, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444248, 'Rebeka', 'Bowich', 'rbowich6v@cam.ac.uk', 'Female', 3, 4, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444249, 'Reuben', 'Hammerman', 'rhammerman6w@xrea.com', 'Male', 3, 4, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444250, 'Nicky', 'Alti', 'nalti6x@eepurl.com', 'Male', 2, 4, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444251, 'Bernette', 'Rash', 'brash6y@thetimes.co.uk', 'Female', 1, 3, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444252, 'Jodi', 'Monument', 'jmonument6z@uiuc.edu', 'Female', 1, 3, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444253, 'Leah', 'Kippins', 'lkippins70@latimes.com', 'Female', 2, 3, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444254, 'Hannis', 'Whetton', 'hwhetton71@blogs.com', 'Female', 2, 2, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444255, 'Cleopatra', 'Nunnerley', 'cnunnerley72@sciencedaily.com', 'Female', 2, 4, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444256, 'Maddi', 'Father', 'mfather73@dailymail.co.uk', 'Female', 1, 4, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444257, 'Kaycee', 'Poter', 'kpoter74@indiegogo.com', 'Female', 3, 3, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444258, 'Dick', 'Kellen', 'dkellen75@walmart.com', 'Male', 2, 2, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444259, 'Issy', 'Goode', 'igoode76@mit.edu', 'Female', 2, 3, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444260, 'Hew', 'Frediani', 'hfrediani77@cbslocal.com', 'Male', 2, 2, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444261, 'Laurette', 'Rominov', 'lrominov78@si.edu', 'Female', 3, 4, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444262, 'Giralda', 'Goshawk', 'ggoshawk79@bloomberg.com', 'Female', 2, 3, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444263, 'Valaria', 'Howgate', 'vhowgate7a@alexa.com', 'Female', 3, 3, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444264, 'Luther', 'Beckworth', 'lbeckworth7b@google.fr', 'Male', 3, 2, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444265, 'Bernadine', 'Barsham', 'bbarsham7c@wsj.com', 'Female', 3, 4, 1009);
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444266, 'Katherine', 'Foulger', 'kfoulger7d@simplemachines.org', 'Female', 2, 2, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444267, 'Evelin', 'Fruchon', 'efruchon7e@un.org', 'Male', 2, 3, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444268, 'Christophe', 'Treadway', 'ctreadway7f@drupal.org', 'Male', 3, 4, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444269, 'Nettle', 'Temblett', 'ntemblett7g@pbs.org', 'Female', 1, 2, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444270, 'Hercules', 'Leydon', 'hleydon7h@ibm.com', 'Male', 3, 4, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444271, 'Franny', 'Stealy', 'fstealy7i@cbsnews.com', 'Male', 2, 2, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444272, 'Merralee', 'Pow', 'mpow7j@mysql.com', 'Female', 1, 4, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444273, 'Algernon', 'Devenport', 'adevenport7k@dedecms.com', 'Male', 2, 3, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444274, 'Dianemarie', 'Faas', 'dfaas7l@deviantart.com', 'Female', 1, 3, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444275, 'Alicia', 'Lere', 'alere7m@ustream.tv', 'Female', 1, 2, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id)
+values (444276, 'Sibyl', 'MacGee', 'smacgee7n@jiathis.com', 'Male', 2, 2, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444277, 'Tracee', 'Kitteringham', 'tkitteringham7o@csmonitor.com', 'Female', 2, 4, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444278, 'Joe', 'Le Fleming', 'jlefleming7p@addthis.com', 'Male', 3, 4, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444279, 'Fraze', 'O''Fogarty', 'fofogarty7q@biglobe.ne.jp', 'Male', 1, 2, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444280, 'Goran', 'Rutter', 'grutter7r@ted.com', 'Male', 2, 3, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444281, 'Ina', 'Curro', 'icurro7s@dailymail.co.uk', 'Female', 2, 3, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444282, 'Salome', 'Kestin', 'skestin7t@squidoo.com', 'Female', 1, 4, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444283, 'John', 'Keir', 'jkeir7u@prweb.com', 'Male', 1, 2, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444284, 'Rebekkah', 'Bradly', 'rbradly7v@linkedin.com', 'Female', 1, 2, 1001); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444285, 'Jacob', 'Davion', 'jdavion7w@huffingtonpost.com', 'Male', 2, 2, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444286, 'Suzann', 'Ladyman', 'sladyman7x@geocities.com', 'Female', 2, 3, 1005); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444287, 'Adamo', 'Taylorson', 'ataylorson7y@imageshack.us', 'Male', 2, 3, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444288, 'Davin', 'Pitcock', 'dpitcock7z@yale.edu', 'Male', 3, 2, 1007); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444289, 'Tommi', 'Gillions', 'tgillions80@amazon.co.jp', 'Female', 2, 2, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444290, 'Carolin', 'Chifney', 'cchifney81@answers.com', 'Female', 1, 2, 1006); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444291, 'Xever', 'Leaney', 'xleaney82@businessinsider.com', 'Male', 1, 4, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444292, 'Neile', 'Semiraz', 'nsemiraz83@privacy.gov.au', 'Female', 2, 4, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444293, 'Tamarra', 'Lengthorn', 'tlengthorn84@g.co', 'Female', 2, 4, 1008); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444294, 'Pierre', 'Darlington', 'pdarlington85@nationalgeographic.com', 'Male', 2, 2, 1003); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444295, 'Kathlin', 'Pate', 'kpate86@comsenz.com', 'Female', 3, 2, 1002); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444296, 'Hilario', 'Durtnall', 'hdurtnall87@alibaba.com', 'Male', 3, 3, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444297, 'Meyer', 'Domerque', 'mdomerque88@imdb.com', 'Male', 3, 4, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444298, 'Dru', 'Christoffersen', 'dchristoffersen89@mapquest.com', 'Female', 1, 2, 1006);
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444299, 'Yetta', 'Jehaes', 'yjehaes8a@tripadvisor.com', 'Female', 2, 2, 1009); 
+insert into Student (student_id, student_name, student_surname, s_email, student_gender, student_year, student_GPA, major_id) 
+values (444300, 'Giovanna', 'Bartkiewicz', 'gbartkiewicz8b@facebook.com', 'Female', 3, 3, 1007); 
+
+select * from Student;
+
+
+
+CREATE TABLE Performance (
+	p_id DECIMAL (20) PRIMARY KEY not null,
+	p_count DECIMAL (3) not null,
+	student_id DECIMAL (20) REFERENCES Student (student_id) not null
+);
+
+
+CREATE TABLE Attendance (
+	attendance_id DECIMAL (20) PRIMARY KEY not null,
+	attendance_num INT not null,
+	subject_id DECIMAL (20) REFERENCES Subject (subject_id) not null,
+	student_id DECIMAL (20) REFERENCES Student (student_id) not null
+);
+
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (991, 38, 226, 44454); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (992, 55, 225, 44460); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (993, 79, 228, 44444); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (994, 83, 226, 44424); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (995, 56, 227, 44416); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (996, 36, 222, 44410); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (997, 90, 226, 44490); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (998, 53, 225, 44451); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (999, 70, 221, 44464); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9910, 40, 223, 44417); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9911, 84, 223, 44464); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9912, 36, 227, 44433); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9913, 62, 223, 44431); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9914, 100, 228, 44451);
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9915, 45, 225, 44432); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9916, 95, 226, 44437); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9917, 28, 228, 44472); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9918, 55, 224, 44456); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9919, 78, 223, 44467); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9920, 37, 228, 44462); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9921, 83, 227, 44421); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9922, 53, 222, 44412); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9923, 50, 225, 44497); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9924, 40, 227, 44444); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9925, 41, 221, 44419); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9926, 91, 225, 44465); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9927, 76, 223, 44476); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9928, 85, 221, 44464); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9929, 58, 221, 44487); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9930, 48, 222, 44480); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9931, 59, 221, 44443); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9932, 60, 222, 44490); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9933, 96, 224, 44447); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9934, 42, 226, 44466); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9935, 26, 221, 44418); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9936, 42, 228, 44416); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9937, 77, 221, 44467); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9938, 71, 223, 44484); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9939, 43, 226, 44485); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9940, 64, 224, 44426); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9941, 68, 225, 44445); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9942, 44, 225, 44456); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9943, 67, 223, 44470); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9944, 40, 224, 44427); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9945, 61, 221, 44468); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9946, 100, 223, 44496);
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9947, 77, 223, 44412); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9948, 42, 226, 44448); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9949, 77, 221, 44444); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9950, 78, 226, 44433); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9951, 63, 228, 44425); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9952, 49, 227, 44472); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9953, 58, 222, 44486); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9954, 93, 227, 44427); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9955, 54, 225, 44442); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9956, 39, 227, 44461); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9957, 26, 222, 44424); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9958, 76, 221, 44447); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9959, 37, 228, 44458); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9960, 67, 226, 44451); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9961, 87, 226, 44486); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9962, 52, 224, 44442); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9963, 36, 224, 44453); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9964, 90, 228, 44422); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9965, 81, 222, 44415); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9966, 31, 221, 44444); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9967, 80, 223, 44418); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9968, 88, 225, 44478); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9969, 73, 223, 44473); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9970, 75, 223, 44417); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9971, 69, 221, 44499); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9972, 90, 228, 44459); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9973, 80, 223, 44494); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9974, 25, 226, 44415); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9975, 44, 225, 44493); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9976, 42, 223, 44498); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9977, 99, 222, 44429); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9978, 96, 226, 44456); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9979, 95, 226, 44462); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9980, 56, 225, 44463); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9981, 39, 228, 44475); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9982, 52, 222, 44410); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9983, 92, 226, 44483); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9984, 95, 227, 44467); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9985, 90, 223, 44468); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9986, 44, 225, 44463); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9987, 97, 228, 44491); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9988, 71, 226, 44434); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9989, 56, 223, 44451); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9990, 28, 223, 44440); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9991, 42, 221, 44414); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9992, 78, 227, 44439); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9993, 61, 223, 44494); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9994, 67, 225, 44495); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9995, 37, 223, 44470); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9996, 36, 221, 44415); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9997, 94, 223, 44492); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9998, 28, 224, 44475); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (9999, 41, 223, 44435); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99100, 77, 224, 44418); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99101, 94, 225, 44472); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99102, 93, 224, 444117); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99103, 33, 222, 44489); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99104, 43, 222, 44488); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99105, 100, 223, 44472); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99106, 38, 228, 44420); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99107, 82, 225, 44472); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99108, 39, 228, 44430); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99109, 31, 224, 44416); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99110, 29, 226, 44472); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99111, 87, 227, 44431); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99112, 62, 224, 44420); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99113, 96, 222, 44425); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99114, 83, 221, 44476); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99115, 29, 223, 44494); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99116, 49, 226, 44472); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99117, 76, 227, 44496); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99118, 46, 228, 44432); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99119, 82, 228, 44435); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99120, 28, 227, 44433); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99121, 50, 222, 44445); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99122, 86, 225, 44410); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99123, 54, 222, 44482); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99124, 48, 226, 44443); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99125, 91, 224, 44411); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99126, 89, 221, 44439); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99127, 35, 222, 44430); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99128, 25, 223, 44495); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99129, 76, 221, 44459); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99130, 90, 227, 44434); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99131, 40, 225, 44422); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99132, 86, 223, 44462); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99133, 91, 225, 44498); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99134, 43, 228, 44430); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99135, 58, 227, 44430); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99136, 34, 222, 44480); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99137, 33, 224, 44476); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99138, 37, 223, 44452); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99139, 67, 224, 44497); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99140, 76, 222, 44499); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99141, 90, 226, 44468); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99142, 60, 222, 44432); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99143, 63, 226, 44416); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99144, 27, 224, 44411); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99145, 37, 228, 44436); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99146, 100, 226, 44493); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99147, 58, 228, 44496); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99148, 81, 225, 44481); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99149, 91, 222, 44468); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99150, 94, 225, 44419); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99151, 57, 225, 44441); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99152, 49, 228, 44449); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99153, 36, 223, 44469); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99154, 87, 222, 44481); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99155, 54, 225, 44483); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99156, 74, 221, 44449); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99157, 43, 223, 44483); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99158, 28, 226, 44411); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99159, 99, 224, 44475); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99160, 52, 228, 44478); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99161, 32, 223, 44467); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99162, 58, 228, 44414); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99163, 55, 228, 44437); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99164, 29, 224, 44423); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99165, 71, 222, 44419); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99166, 53, 223, 44431); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99167, 83, 223, 44462); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99168, 63, 226, 44495); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99169, 51, 227, 444138); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99170, 93, 222, 44484); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99171, 98, 225, 444138); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99172, 62, 225, 44448); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99173, 74, 227, 44493); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99174, 94, 224, 44467); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99175, 81, 224, 44495); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99176, 55, 224, 44442); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99177, 82, 225, 44461); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99178, 37, 222, 44444); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99179, 69, 222, 44429); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99180, 35, 228, 44418); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99181, 28, 228, 44450); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99182, 88, 225, 44467); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99183, 43, 226, 444182); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99184, 43, 226, 44425); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99185, 39, 222, 444141); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99186, 29, 225, 44444); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99187, 67, 227, 44450); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99188, 99, 225, 44462); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99189, 68, 222, 44482); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99190, 37, 228, 44483); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99191, 79, 226, 444136); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99192, 98, 222, 44494); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99193, 39, 228, 44478); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99194, 43, 228, 44486); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99195, 77, 226, 44476); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99196, 86, 228, 44417); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99197, 44, 222, 44495); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99198, 44, 226, 44480); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99199, 66, 221, 444159); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99200, 34, 221, 444133); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99201, 90, 223, 444189); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99202, 48, 225, 444137); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99203, 72, 221, 444140); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99204, 86, 224, 444157); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99205, 69, 228, 444198); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99206, 67, 227, 444194); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99207, 70, 227, 444125); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99208, 87, 228, 444197); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99209, 71, 221, 444174); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99210, 37, 222, 444146); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99211, 60, 226, 444133); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99212, 63, 221, 444158); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99213, 49, 222, 444163); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99214, 30, 226, 444155); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99215, 77, 226, 444184); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99216, 64, 224, 444173); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99217, 90, 226, 444115); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99218, 44, 228, 444191); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99219, 39, 223, 444145); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99220, 42, 228, 444146); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99221, 44, 224, 444163); 
+insert into Attendance (attendance_id, attendance_num, subject_id, student_id) values (99222, 26, 228, 444124);
+
+SELECT * FROM Attendance;
+
+CREATE TABLE Teacher (
+	teacher_id DECIMAL (20) PRIMARY KEY not null,
+	teacher_name VARCHAR (36) not null,
+	teacher_surname VARCHAR (36) not null,
+	teacher_gender VARCHAR(10) not null,
+	teacher_salary FLOAT not null,
+	subject_id DECIMAL (20) REFERENCES Subject (subject_id) not null
+);
+
+ALTER TABLE Teacher ADD COLUMN t_email VARCHAR (36);
+
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (1, 'Elbertina', 'Bollins', 'ebollins0@cisco.com', 'Female', '800.66', 224);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (2, 'Arman', 'Emmens', 'aemmens1@bloglines.com', 'Male', '670.60', 222);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (3, 'Egbert', 'Whittier', 'ewhittier2@hostgator.com', 'Male', '818.36', 221);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (4, 'Diahann', 'Mowbray', 'dmowbray3@pbs.org', 'Female', '702.90', 228);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (5, 'Doe', 'Lavalde', 'dlavalde4@newsvine.com', 'Female', '605.86', 224);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (6, 'Loralee', 'Sandercock', 'lsandercock5@pagesperso-orange.fr', 'Female', '905.92', 225);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (7, 'Denney', 'Scryne', 'dscryne6@ebay.com', 'Male', '545.55', 225);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (8, 'Clareta', 'Rummings', 'crummings7@whitehouse.gov', 'Female', '753.10', 226);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (9, 'Candie', 'Gilling', 'cgilling8@omniture.com', 'Female', '708.02', 223);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (10, 'Rosina', 'Varfalameev', 'rvarfalameev9@wikimedia.org', 'Female', '750.50', 225);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (11, 'Nelly', 'Mattis', 'nmattisa@freewebs.com', 'Female', '967.07', 225);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (12, 'Bili', 'Schwandt', 'bschwandtb@over-blog.com', 'Female', '813.35', 225);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (13, 'Petey', 'Rounding', 'proundingc@kickstarter.com', 'Male', '664.74', 224);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (14, 'Dru', 'Dominiak', 'ddominiakd@tripod.com', 'Female', '753.15', 228);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (15, 'Jess', 'Whittuck', 'jwhittucke@163.com', 'Male', '843.94', 225);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (16, 'Welby', 'Yurkin', 'wyurkinf@list-manage.com', 'Male', '572.39', 225);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (17, 'Bruce', 'Songhurst', 'bsonghurstg@cocolog-nifty.com', 'Male', '653.25', 222);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (18, 'Zondra', 'Vella', 'zvellah@photobucket.com', 'Female', '529.43', 226);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (19, 'Pamella', 'Le Surf', 'plesurfi@skyrock.com', 'Female', '612.30', 221);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (20, 'Zacherie', 'Rubinfeld', 'zrubinfeldj@nasa.gov', 'Male', '612.60', 225);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (21, 'Joannes', 'Upshall', 'jupshallk@liveinternet.ru', 'Female', '513.94', 223);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (22, 'Bendick', 'Brill', 'bbrilll@t-online.de', 'Male', '978.52', 223);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (23, 'Nedda', 'Bushe', 'nbushem@ucoz.ru', 'Female', '885.27', 224);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (24, 'Moria', 'Waghorn', 'mwaghornn@unblog.fr', 'Female', '817.51', 222);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (25, 'Rodolfo', 'Ciani', 'rcianio@ovh.net', 'Male', '905.93', 224);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (26, 'Jean', 'Maier', 'jmaierp@cdbaby.com', 'Male', '821.16', 228);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (27, 'Mischa', 'Duffett', 'mduffettq@networksolutions.com', 'Male', '706.76', 224);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (28, 'Mason', 'Hiorn', 'mhiornr@mozilla.com', 'Male', '666.28', 226);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (29, 'Elie', 'Drayton', 'edraytons@parallels.com', 'Female', '579.82', 221);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (30, 'Frans', 'Minelli', 'fminellit@usatoday.com', 'Male', '887.89', 228);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (31, 'Myranda', 'Simcock', 'msimcocku@techcrunch.com', 'Female', '816.89', 227);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (32, 'Priscilla', 'Belmont', 'pbelmontv@goo.gl', 'Female', '725.37', 226);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (33, 'Lawrence', 'Longcake', 'llongcakew@acquirethisname.com', 'Male', '631.41', 224);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (34, 'Peirce', 'Waker', 'pwakerx@economist.com', 'Male', '571.52', 225);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (35, 'Alexi', 'Dadswell', 'adadswelly@microsoft.com', 'Female', '932.95', 227);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (36, 'Garland', 'Inkin', 'ginkinz@europa.eu', 'Female', '539.27', 221);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (37, 'Diego', 'Auchterlonie', 'dauchterlonie10@jimdo.com', 'Male', '586.11', 225);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (38, 'Xever', 'Leatherland', 'xleatherland11@ustream.tv', 'Male', '783.91', 222);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (39, 'Chad', 'Chasteau', 'cchasteau12@ustream.tv', 'Female', '937.95', 227);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (40, 'Delbert', 'Newport', 'dnewport13@eventbrite.com', 'Male', '943.03', 228);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (41, 'Leo', 'Bowser', 'lbowser14@godaddy.com', 'Male', '588.48', 225);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (42, 'Benjie', 'Englishby', 'benglishby15@ihg.com', 'Male', '747.44', 228);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (43, 'Karel', 'Atheis', 'katheis16@drupal.org', 'Male', '539.56', 222);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (44, 'Inna', 'Godfree', 'igodfree17@tamu.edu', 'Female', '923.18', 223);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (45, 'Bay', 'Howey', 'bhowey18@ox.ac.uk', 'Male', '791.36', 221);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (46, 'Oran', 'Goode', 'ogoode19@moonfruit.com', 'Male', '516.08', 227);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (47, 'Nicolette', 'Dutch', 'ndutch1a@csmonitor.com', 'Female', '752.07', 223);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (48, 'Melisse', 'Atcock', 'matcock1b@house.gov', 'Female', '789.74', 228);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (49, 'Leilah', 'Garnar', 'lgarnar1c@mediafire.com', 'Female', '652.49', 221);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (50, 'Elwin', 'Kitteringham', 'ekitteringham1d@de.vu', 'Male', '715.62', 226);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (51, 'Paddie', 'Goldman', 'pgoldman1e@wisc.edu', 'Male', '710.44', 227);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (52, 'Ethelbert', 'Dawson', 'edawson1f@slashdot.org', 'Male', '680.40', 221);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (53, 'Angeli', 'Twiddle', 'atwiddle1g@devhub.com', 'Male', '634.57', 227);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (54, 'Camila', 'Toor', 'ctoor1h@instagram.com', 'Female', '793.04', 222);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (55, 'Elisabetta', 'McKerley', 'emckerley1i@hud.gov', 'Female', '909.52', 227);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (56, 'Babita', 'Hardcastle', 'bhardcastle1j@forbes.com', 'Female', '501.10', 222);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (57, 'Joanne', 'Fugere', 'jfugere1k@about.com', 'Female', '932.11', 222);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (58, 'Murray', 'Birts', 'mbirts1l@ted.com', 'Male', '608.62', 228);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (59, 'Guenna', 'Knoles', 'gknoles1m@google.ru', 'Female', '897.50', 221);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (60, 'Susann', 'Betchley', 'sbetchley1n@cpanel.net', 'Female', '756.07', 224);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (61, 'Lanni', 'Cunio', 'lcunio1o@google.pl', 'Female', '674.94', 221);
+insert into Teacher (teacher_id, teacher_name, teacher_surname, t_email, teacher_gender, teacher_salary, subject_id) values (62, 'Pierce', 'Crombleholme', 'pcrombleholme1p@seattletimes.com', 'Male', '595.89', 226);
+
+select * from Teacher;
+
+
+
+CREATE TABLE Report (
+	report_id DECIMAL (20) PRIMARY KEY not null,
+	report_name VARCHAR (50) not null,
+	r_description VARCHAR (250) not null,
+	teacher_id DECIMAL (20) REFERENCES Teacher (teacher_id),
+	student_id DECIMAL (20) REFERENCES Student (student_id)
+);
+
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (51, 'Daltfresh', 'adipiscing elit proin risus praesent lectus vestibulum quam sapien varius ut blandit', 34, null);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (52, 'Otcom', 'congue eget semper rutrum nulla nunc purus phasellus in felis donec semper sapien a libero nam dui proin leo', 11, 44411);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (53, 'Tresom', 'lacus purus aliquet at feugiat non pretium quis lectus suspendisse potenti', 49, 44448);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (54, 'Opela', 'mattis pulvinar nulla pede ullamcorper augue a suscipit nulla elit', 58, 44469);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (55, 'Bitchip', 'in ante vestibulum ante ipsum primis in faucibus orci luctus', 6, 44438);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (56, 'Bytecard', 'sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis', 44, 44474);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (57, 'Cardguard', 'nulla sed vel enim sit amet nunc viverra dapibus nulla suscipit', 16, null);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (58, 'Prodder', 'sit amet consectetuer adipiscing elit proin interdum mauris non ligula', 13, 44414);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (59, 'Subin', 'tellus nisi eu orci mauris lacinia sapien quis libero nullam sit amet turpis elementum', 1, null);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (510, 'Tempsoft', 'posuere cubilia curae nulla dapibus dolor vel est donec odio justo sollicitudin ut suscipit a feugiat et eros vestibulum ac', 24, 44481);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (511, 'Domainer', 'nunc nisl duis bibendum felis sed interdum venenatis turpis enim blandit mi in porttitor', 14, null);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (512, 'Overhold', 'orci eget orci vehicula condimentum curabitur in libero ut massa volutpat convallis morbi odio odio elementum', 57, null);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (513, 'Asoka', 'consequat metus sapien ut nunc vestibulum ante ipsum primis in', null, 44413);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (514, 'Tres-Zap', 'ultrices libero non mattis pulvinar nulla pede ullamcorper augue a suscipit nulla elit ac nulla sed vel enim', 31, 44496);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (515, 'Gembucket', 'eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti', 9, null);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (516, 'Andalax', 'praesent id massa id nisl venenatis lacinia aenean sit amet justo morbi ut odio cras mi', 17, 44431);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (517, 'Job', 'justo morbi ut odio cras mi pede malesuada in imperdiet et commodo vulputate justo in blandit ultrices enim lorem', 43, 44491);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (518, 'Hatity', 'viverra pede ac diam cras pellentesque volutpat dui maecenas tristique est et tempus semper est quam pharetra magna ac consequat', 54, 4448);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (519, 'Matsoft', 'quam nec dui luctus rutrum nulla tellus in sagittis dui vel nisl duis ac nibh fusce lacus', 41, null);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (520, 'Kanlam', 'ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae nulla dapibus dolor vel', 29, null);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (521, 'Namfix', 'eros viverra eget congue eget semper rutrum nulla nunc purus', 16, 44460);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (522, 'Trippledex', 'consequat varius integer ac leo pellentesque ultrices mattis odio donec vitae nisi nam ultrices libero non', 7, 44447);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (523, 'Ronstring', 'in libero ut massa volutpat convallis morbi odio odio elementum eu interdum eu tincidunt in leo maecenas pulvinar lobortis', 25, 44495);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (524, 'Bigtax', 'congue diam id ornare imperdiet sapien urna pretium nisl ut volutpat sapien arcu sed augue aliquam erat volutpat', 2, null);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (525, 'It', 'ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in', 57, 44462);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (526, 'Tres-Zap', 'pede malesuada in imperdiet et commodo vulputate justo in blandit ultrices enim', 25, null);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (527, 'Bitwolf', 'volutpat erat quisque erat eros viverra eget congue eget semper', 6, null);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (528, 'Prodder', 'curae donec pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer', null, 44446);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (529, 'Domainer', 'lectus pellentesque at nulla suspendisse potenti cras in purus eu', null, 44451);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (530, 'It', 'sit amet nunc viverra dapibus nulla suscipit ligula in lacus curabitur at ipsum', 54, 44478);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (531, 'Quo Lux', 'mauris ullamcorper purus sit amet nulla quisque arcu libero rutrum ac lobortis vel dapibus at diam nam', 15, 44459);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (532, 'Redhold', 'rhoncus sed vestibulum sit amet cursus id turpis integer aliquet massa id lobortis convallis tortor risus dapibus augue vel', 16, 44487);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (533, 'Redhold', 'consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum sed magna', 48, 44490);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (534, 'Biodex', 'duis at velit eu est congue elementum in hac habitasse platea dictumst morbi', 4, null);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (535, 'Zaam-Dox', 'sapien quis libero nullam sit amet turpis elementum ligula vehicula consequat morbi a ipsum integer a', 4, 44473);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (536, 'Matsoft', 'in quis justo maecenas rhoncus aliquam lacus morbi quis tortor id nulla ultrices aliquet maecenas leo odio condimentum id luctus', 53, 44467);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (537, 'Temp', 'integer a nibh in quis justo maecenas rhoncus aliquam lacus morbi quis tortor id nulla ultrices aliquet maecenas leo odio', 16, 44466);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (538, 'Rank', 'libero convallis eget eleifend luctus ultricies eu nibh quisque id justo sit', null, 44454);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (539, 'Konklab', 'sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in', 15, 44465);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (540, 'Zoolab', 'rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum sed magna', 29, 44439);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (541, 'Gembucket', 'quis turpis eget elit sodales scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis sed ante vivamus tortor duis', 52, 44425);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (542, 'Latlux', 'lorem ipsum dolor sit amet consectetuer adipiscing elit proin interdum mauris non ligula pellentesque ultrices phasellus', null, 44476);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (543, 'Y-Solowarm', 'dui luctus rutrum nulla tellus in sagittis dui vel nisl duis ac', 48, null);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (544, 'Domainer', 'id nisl venenatis lacinia aenean sit amet justo morbi ut odio cras mi pede malesuada in imperdiet', 15, null);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (545, 'Ronstring', 'orci mauris lacinia sapien quis libero nullam sit amet turpis elementum ligula vehicula consequat morbi', 57, 44499);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (546, 'Tin', 'pede ac diam cras pellentesque volutpat dui maecenas tristique est et tempus semper est quam', 8, 44486);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (547, 'Trippledex', 'viverra eget congue eget semper rutrum nulla nunc purus phasellus', 51, null);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (548, 'Cardguard', 'non interdum in ante vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae', 24, 44446);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (549, 'Zamit', 'suspendisse potenti nullam porttitor lacus at turpis donec posuere metus vitae ipsum aliquam non mauris morbi', 11, null);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (550, 'Overhold', 'vulputate luctus cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum', 19, 44457);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (551, 'Asoka', 'et magnis dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et magnis dis', null, 44445);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (552, 'Subin', 'vel nisl duis ac nibh fusce lacus purus aliquet at feugiat non pretium quis lectus suspendisse potenti in eleifend', 24, 44476);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (553, 'Quo Lux', 'tempus sit amet sem fusce consequat nulla nisl nunc nisl duis bibendum felis sed interdum venenatis turpis enim blandit mi', 11, 44472);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (554, 'Voyatouch', 'vivamus in felis eu sapien cursus vestibulum proin eu mi nulla ac enim in tempor turpis nec euismod', 31, 44441);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (555, 'Alpha', 'nisl ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in hac', 31, 44427);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (556, 'Zontrax', 'nullam sit amet turpis elementum ligula vehicula consequat morbi a ipsum integer a nibh in', 55, null);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (557, 'Job', 'sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque', 45, 44450);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (558, 'Sonair', 'elementum pellentesque quisque porta volutpat erat quisque erat eros viverra eget congue eget semper', 48, 44417);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (559, 'Zontrax', 'platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum', 27, 44440);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (560, 'Overhold', 'tempus sit amet sem fusce consequat nulla nisl nunc nisl duis bibendum', 19, 44498);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (561, 'Cardguard', 'aenean sit amet justo morbi ut odio cras mi pede malesuada in imperdiet et', 26, null);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (562, 'Tresom', 'quis lectus suspendisse potenti in eleifend quam a odio in hac habitasse', 5, 44436);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (563, 'Transcof', 'hac habitasse platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien placerat', 12, 44449);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (564, 'Aerified', 'fusce consequat nulla nisl nunc nisl duis bibendum felis sed interdum venenatis turpis', null, 44483);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (565, 'Alphazap', 'congue risus semper porta volutpat quam pede lobortis ligula sit amet eleifend pede libero quis orci', 25, 44497);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (566, 'Regrant', 'sagittis dui vel nisl duis ac nibh fusce lacus purus aliquet at feugiat non pretium quis lectus', 43, 44487);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (567, 'Quo Lux', 'lorem quisque ut erat curabitur gravida nisi at nibh in hac habitasse platea dictumst aliquam', 18, 44437);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (568, 'Redhold', 'ut erat id mauris vulputate elementum nullam varius nulla facilisi cras non velit nec nisi vulputate', null, 44479);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (569, 'Cookley', 'consectetuer adipiscing elit proin interdum mauris non ligula pellentesque ultrices phasellus id sapien in sapien', 15, 44494);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (570, 'Vagram', 'risus dapibus augue vel accumsan tellus nisi eu orci mauris lacinia sapien quis libero', 6, 44492);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (571, 'Zontrax', 'nulla mollis molestie lorem quisque ut erat curabitur gravida nisi at nibh in hac habitasse platea dictumst aliquam augue', 34, 44453);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (572, 'Holdlamis', 'nibh fusce lacus purus aliquet at feugiat non pretium quis', 50, 44493);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (573, 'Bamity', 'nisl nunc nisl duis bibendum felis sed interdum venenatis turpis enim', 22, 44435);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (574, 'Hatity', 'aliquet maecenas leo odio condimentum id luctus nec molestie sed justo pellentesque viverra pede ac diam cras pellentesque volutpat dui', 24, 44430);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (575, 'Namfix', 'sagittis nam congue risus semper porta volutpat quam pede lobortis ligula sit amet eleifend pede libero', 37, 44476);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (576, 'Rank', 'quam fringilla rhoncus mauris enim leo rhoncus sed vestibulum sit amet cursus id turpis integer', 55, 44494);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (577, 'Bigtax', 'felis eu sapien cursus vestibulum proin eu mi nulla ac enim in tempor turpis nec euismod scelerisque', 29, 44492);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (578, 'Lotstring', 'leo odio condimentum id luctus nec molestie sed justo pellentesque viverra pede ac diam cras pellentesque volutpat dui maecenas', 34, 44471);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (579, 'Span', 'porttitor lacus at turpis donec posuere metus vitae ipsum aliquam non mauris morbi non lectus aliquam sit amet diam in', 18, 44482);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (580, 'Trippledex', 'vestibulum proin eu mi nulla ac enim in tempor turpis nec euismod scelerisque quam turpis adipiscing', null, 44456);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (581, 'Fix San', 'enim blandit mi in porttitor pede justo eu massa donec', 51, 44491);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (582, 'Y-Solowarm', 'in imperdiet et commodo vulputate justo in blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing elit proin', 50, 44474);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (583, 'Treeflex', 'odio cras mi pede malesuada in imperdiet et commodo vulputate justo in', 57, 44436);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (584, 'Rank', 'commodo placerat praesent blandit nam nulla integer pede justo lacinia eget tincidunt eget tempus vel pede morbi porttitor', 45, 44465);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (585, 'Toughjoyfax', 'sed nisl nunc rhoncus dui vel sem sed sagittis nam congue risus semper', 24, 44484);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (586, 'Domainer', 'ut tellus nulla ut erat id mauris vulputate elementum nullam', 47, 44448);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (587, 'Biodex', 'dignissim vestibulum vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia', null, 44437);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (588, 'Sub-Ex', 'quam sapien varius ut blandit non interdum in ante vestibulum ante ipsum', 35, 44452);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (589, 'Voyatouch', 'sed ante vivamus tortor duis mattis egestas metus aenean fermentum donec ut mauris eget massa tempor convallis nulla', 28, 44435);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (590, 'Solarbreeze', 'sapien sapien non mi integer ac neque duis bibendum morbi non quam', 30, 44414);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (591, 'Quo Lux', 'consequat ut nulla sed accumsan felis ut at dolor quis odio consequat varius integer ac', 19, 44480);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (592, 'Prodder', 'turpis adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin at turpis a pede posuere nonummy', 15, 4441);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (593, 'Fintone', 'molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in purus', 3, 44440);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (594, 'Temp', 'turpis enim blandit mi in porttitor pede justo eu massa donec dapibus duis at velit eu est congue elementum', null, 44459);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (595, 'Domainer', 'amet sapien dignissim vestibulum vestibulum ante ipsum primis in faucibus orci luctus', 24, 44464);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (596, 'Trippledex', 'scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis sed ante vivamus tortor duis mattis egestas metus aenean', 26, 44472);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (597, 'Matsoft', 'vel nulla eget eros elementum pellentesque quisque porta volutpat erat', 7, 44410);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (598, 'Bitwolf', 'blandit non interdum in ante vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere', 5, 44456);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (599, 'Zathin', 'tellus in sagittis dui vel nisl duis ac nibh fusce lacus purus', 51, 44415);
+insert into Report (report_id, report_name, r_description, teacher_id, student_id) values (500, 'Zontrax', 'sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel', null, 44445);
+
+select * from Report;
+
+
+CREATE TABLE Warn (
+	warn_id DECIMAL (20) PRIMARY KEY not null,
+	warn_description TEXT not null,
+	warn_start_date DATE,
+	warn_end_date DATE,
+	teacher_id DECIMAL (20) REFERENCES Teacher (teacher_id),
+	student_id DECIMAL (20) REFERENCES Student (student_id),
+	dean_id DECIMAL (20) REFERENCES  Dean (dean_id )
+);
+
+ALTER TABLE Warn ALTER COLUMN warn_start_date SET not null;
+ALTER TABLE Warn ALTER COLUMN warn_end_date SET not null;
+
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (331, 'nulla neque libero convallis eget eleifend luctus ultricies', '6/8/2019', '9/16/2020', 48, null, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (332, 'mus etiam vel augue vestibulum', '5/5/2019', '9/21/2020', null, 44425, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (333, 'integer pede justo lacinia eget tincidunt', '9/22/2019', '8/29/2020', null, 44478, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (334, 'integer a nibh in quis justo maecenas', '8/22/2019', '4/18/2020', null, 44415, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (335, 'justo aliquam quis turpis eget elit sodales', '8/30/2019', '1/6/2020', null, 44427, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (336, 'sapien in sapien iaculis congue vivamus metus arcu adipiscing', '12/20/2018', '11/5/2020', null, 44441, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (337, 'donec odio justo sollicitudin ut suscipit a feugiat', '1/16/2019', '6/17/2020', null, 44415, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (338, 'eros elementum pellentesque quisque porta volutpat erat quisque', '9/19/2019', '1/29/2020', null, 44415, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (339, 'nulla neque libero convallis eget eleifend luctus ultricies eu nibh', '12/18/2018', '4/8/2020', null, 44479, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3310, 'vulputate ut ultrices vel augue vestibulum ante ipsum primis', '7/22/2019', '3/5/2020', null, 44494, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3311, 'ut rhoncus aliquet pulvinar sed nisl nunc rhoncus dui', '8/11/2019', '5/25/2020', 14, null, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3312, 'proin interdum mauris non ligula pellentesque ultrices phasellus id', '1/25/2019', '9/7/2020', null, 44437, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3313, 'mattis egestas metus aenean fermentum donec ut mauris', '10/10/2019', '9/16/2020', 10, null, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3314, 'tincidunt eget tempus vel pede morbi', '10/3/2019', '5/14/2020', 1, null, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3315, 'quis orci eget orci vehicula condimentum curabitur', '10/3/2019', '3/10/2020', null, 44485, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3316, 'justo sit amet sapien', '12/1/2018', '9/24/2020', 24, null, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3317, 'commodo placerat praesent blandit nam nulla integer pede justo lacinia', '4/11/2019', '6/26/2020', null, 44487, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3318, 'id massa id nisl venenatis lacinia aenean', '4/22/2019', '1/5/2020', null, 44431, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3319, 'luctus et ultrices posuere cubilia curae mauris viverra diam', '4/28/2019', '9/8/2020', null, 44457, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3320, 'id nulla ultrices', '5/18/2019', '3/8/2020', null, 44451, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3321, 'hac habitasse platea dictumst etiam faucibus', '10/31/2019', '1/15/2020', null, 44488, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3322, 'interdum venenatis turpis', '8/11/2019', '9/20/2020', null, 44427, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3323, 'et tempus semper est quam pharetra magna ac consequat', '6/8/2019', '11/10/2020', null, 44425, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3324, 'ut blandit non interdum in ante', '12/25/2018', '4/1/2020', null, 44417, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3325, 'pretium nisl ut volutpat', '2/12/2019', '6/14/2020', 40, null, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3326, 'adipiscing lorem vitae mattis', '8/20/2019', '3/13/2020', null, 44473, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3327, 'non quam nec dui luctus rutrum nulla', '10/28/2019', '3/17/2020', null, 44499, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3328, 'luctus cum sociis natoque penatibus', '4/23/2019', '12/30/2019', null, 44479, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3329, 'felis donec semper sapien a libero', '11/10/2019', '10/12/2020', null, 44438, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3330, 'felis donec semper sapien', '12/19/2018', '8/3/2020', null, 44446, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3331, 'nullam sit amet turpis elementum ligula vehicula consequat morbi', '7/21/2019', '7/19/2020', null, 44498, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3332, 'convallis eget eleifend luctus ultricies', '12/14/2018', '10/21/2020', null, 44436, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3333, 'nulla tellus in sagittis dui vel nisl duis', '2/27/2019', '8/14/2020', null, 44492, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3334, 'eget elit sodales scelerisque mauris sit amet', '7/26/2019', '5/3/2020', null, 44467, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3335, 'primis in faucibus orci luctus', '11/16/2019', '9/12/2020', null, 44493, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3336, 'ultrices posuere cubilia curae mauris viverra diam', '6/5/2019', '3/10/2020', null, 44431, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3337, 'sed tincidunt eu', '1/15/2019', '7/19/2020', null, 44439, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3338, 'venenatis non sodales', '4/13/2019', '8/17/2020', null, 44487, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3339, 'dictumst aliquam augue', '9/2/2019', '3/17/2020', null, 44459, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3340, 'luctus nec molestie sed justo pellentesque viverra', '7/17/2019', '1/15/2020', null, 44427, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3341, 'faucibus orci luctus et ultrices posuere cubilia curae duis', '12/12/2018', '1/5/2020', null, 44455, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3342, 'mollis molestie lorem quisque ut erat curabitur', '1/17/2019', '2/8/2020', null, 44475, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3343, 'bibendum morbi non quam nec', '8/2/2019', '11/18/2019', null, 44442, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3344, 'mauris lacinia sapien quis libero nullam', '1/24/2019', '7/10/2020', null, 44413, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3345, 'pellentesque at nulla suspendisse potenti cras in purus eu', '12/6/2018', '9/22/2020', null, 44445, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3346, 'cras pellentesque volutpat dui maecenas tristique', '4/11/2019', '5/30/2020', null, 44433, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3347, 'placerat ante nulla justo aliquam quis turpis eget', '9/26/2019', '5/19/2020', null, 44418, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3348, 'curae duis faucibus accumsan odio curabitur convallis duis consequat', '10/27/2019', '5/21/2020', 38, null, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3349, 'magna ac consequat metus sapien ut nunc vestibulum ante', '11/2/2019', '4/17/2020', null, 44497, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3350, 'sit amet nunc viverra dapibus', '11/27/2018', '1/22/2020', null, 44416, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3351, 'elit proin risus praesent lectus', '3/13/2019', '6/15/2020', null, 44468, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3352, 'lacinia sapien quis libero nullam', '4/1/2019', '9/9/2020', null, 44441, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3353, 'primis in faucibus orci luctus et ultrices posuere cubilia curae', '10/10/2019', '4/6/2020', null, 44444, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3354, 'convallis duis consequat dui nec nisi volutpat', '5/2/2019', '5/27/2020', null, 44458, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3355, 'et ultrices posuere cubilia curae nulla dapibus', '6/8/2019', '5/8/2020', null, 44414, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3356, 'scelerisque quam turpis adipiscing lorem vitae mattis nibh', '2/22/2019', '5/25/2020', null, 44452, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3357, 'ligula suspendisse ornare consequat lectus in', '12/2/2018', '3/4/2020', 25, null, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3358, 'vestibulum aliquet ultrices erat tortor sollicitudin mi sit amet', '1/8/2019', '5/10/2020', null, 44443, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3359, 'in est risus auctor sed tristique in tempus', '4/21/2019', '2/11/2020', null, 44431, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3360, 'curae duis faucibus', '3/14/2019', '8/1/2020', null, 44490, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3361, 'vel nulla eget eros elementum pellentesque quisque porta', '10/1/2019', '12/8/2019', null, 44423, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3362, 'nibh in quis justo maecenas rhoncus aliquam lacus', '6/5/2019', '3/5/2020', null, 44467, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3363, 'aliquet maecenas leo odio condimentum id luctus nec', '5/3/2019', '5/12/2020', null, 44420, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3364, 'iaculis congue vivamus metus arcu adipiscing molestie', '3/11/2019', '5/19/2020', null, 44440, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3365, 'sed augue aliquam erat', '2/21/2019', '7/8/2020', null, 44478, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3366, 'accumsan felis ut at dolor', '12/17/2018', '11/24/2019', null, 44439, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3367, 'nisl ut volutpat sapien arcu sed augue aliquam erat', '2/19/2019', '2/6/2020', null, 44432, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3368, 'eget massa tempor convallis', '5/18/2019', '7/5/2020', 54, null, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3369, 'est et tempus semper est quam pharetra magna', '3/24/2019', '1/5/2020', null, 44454, null);
+insert into Warn (warn_id, warn_description, warn_start_date, warn_end_date, teacher_id, student_id, dean_id) values (3370, 'eget orci vehicula condimentum curabitur in', '12/31/2018', '10/9/2020', null, 44467, null);
+
+SELECT * FROM Warn;
+
+
+DELETE FROM Warn
+WHERE warn_end_date < CURRENT_DATE - 180;
+
+SELECT * FROM Report;
+SELECT * FROM Warn;
+
+UPDATE University 
+SET university_name = 'NITU (NURSULTAN IT UNIVERSITY)'
+WHERE university_id = 5555555555;
+
+UPDATE Dean 
+SET dean_name = 'Nursultan', dean_surname = 'Khaimuldin'
+WHERE dean_id = 10001;
+
+ 
+UPDATE Dean 
+SET Deputy_Dean = 'Askar Khaimuldin'
+WHERE dean_id = 10001;
+
+UPDATE Rector
+SET rector_name = 'Darkhan', rector_surname = 'Ahmed-Zaki'
+WHERE rector_id = 10011;
+
+
+UPDATE Major
+SET major_name = 'Cyber Security'
+WHERE major_id = 1005;
+
+
+UPDATE Subject
+SET subject_name = 'Cyber Security'
+WHERE subject_id = 228;
+
+DELETE FROM Student 
+WHERE s_email = 'mdomerque88@imdb.com';
+
+UPDATE Student 
+SET s_email = 'Dru.CH@mapquest.com'
+WHERE student_id = 444298;
+
+
+DROP TABLE Performance;
+
+
+UPDATE Attendance 
+SET attendance_num = attendance_num + 20
+WHERE attendance_num < 70;
+
+DELETE FROM Attendance 
+WHERE attendance_num < 50;
+
+
+UPDATE Teacher 
+SET teacher_salary = teacher_salary + 100
+WHERE subject_id = 224;
+
+UPDATE Report
+SET report_name = 'TEACHER ASTANA IT'
+WHERE report_id = 598;
+
+DELETE FROM Warn
+WHERE warn_end_date < CURRENT_DATE - 180;
+
+
+ALTER TABLE Teacher
+ALTER COLUMN teacher_salary TYPE INT
+
+UPDATE Rector
+SET rector_salary = rector_salary + 1000
+WHERE rector_name = 'Darkhan'
+
+UPDATE Student
+SET student_gpa = ROUND((random() * 3 +1)::numeric,1)
+
+
+
+
+
+ 
+SELECT DISTINCT Report.Student_id, Report.report_name, Report.r_description, Warn.warn_description
+FROM Report
+INNER JOIN Warn
+ON Report.student_id = Warn.student_id
+
+
+ 
+SELECT DISTINCT Student.student_id, Student.student_name, Student.student_surname, Student.student_gpa, Attendance.attendance_num
+FROM Student
+LEFT JOIN Attendance
+ON Student.student_id = Attendance.student_id
+WHERE (Attendance.attendance_num < 70 OR Student.student_gpa <= 2) AND Student.major_id = 1005 AND Student.student_gender = 'Female'
+ORDER BY Attendance.attendance_num
+
+
+
+SELECT student_name, s_email, length(s_email)
+FROM Student
+WHERE length(s_email) > 30 AND student_name LIKE 'A%'
+
+SELECT count(Student.student_id)
+FROM Student
+RIGHT JOIN Attendance
+ON Student.student_id = Attendance.student_id
+WHERE major_id = 1005 AND student_gpa > 3.5 AND attendance_num > 70
+
+
+
+SELECT Subject.subject_name, count(Teacher.teacher_id)
+FROM Teacher
+RIGHT JOIN Subject
+ON Teacher.subject_id = Subject.subject_id
+GROUP BY Subject.subject_id
+
+SELECT ((sum(teacher_salary) + sum(Dean.dean_salary) + sum(Rector.rector_salary)) / (count(teacher_id)+count(Dean.dean_id) + count(Rector.rector_id))) AS "AVG"
+FROM Teacher, Rector
+FULL OUTER JOIN Dean 
+ON TRUE
+
+SELECT Student.student_id, Student.student_name,Student.student_name, count(Warn.student_id) as "warn_count"
+FROM Student, Warn
+WHERE Student.student_id = Warn.student_id
+GROUP BY Student.student_id
+ORDER BY Student.student_id
+
+
+
+SELECT Teacher.teacher_id, Teacher.teacher_name,Teacher.teacher_surname, count(Report.teacher_id) as "report_count"
+FROM Teacher, Report
+WHERE Teacher.teacher_id = Report.teacher_id
+GROUP BY Teacher.teacher_id
+ORDER BY Teacher.teacher_id
+
+
+SELECT Major.major_name, count(Student.student_id)
+FROM Student
+RIGHT JOIN Major
+ON Student.major_id = Major.major_id
+GROUP BY Major.major_id
+
+
+SELECT Student.student_name, Student.student_surname, Attendance.attendance_num, Subject.subject_name
+FROM Subject, Attendance
+INNER JOIN Student
+ON Student.student_id = Attendance.student_id
+WHERE Subject.subject_id = Attendance.subject_id
+ORDER BY Student.student_id
+ 
+
+
+SELECT student_name, student_surname
+FROM Student
+WHERE student_gpa = (SELECT MAX(student_gpa) FROM Student) OR student_gpa > (SELECT AVG(student_gpa) FROM Student)
+
+SELECT DISTINCT teacher_name, teacher_surname, teacher_salary
+FROM Teacher
+WHERE teacher_salary > (SELECT MAX(teacher_salary) FROM Teacher) - (SELECT MIN(teacher_salary) FROM Teacher) AND subject_id = 222
+
+
+SELECT University.university_name, Rector.rector_name, Dean.dean_name, Dean.Deputy_Dean, Teacher.teacher_name, Teacher.teacher_salary as "Min teacher salary"
+FROM University, Rector, Dean
+INNER JOIN Teacher
+ON Teacher.teacher_salary = (SELECT MIN(Teacher.teacher_salary) FROM Teacher)
+
+
+
+SELECT student_name, student_surname
+FROM Student
+WHERE student_id = ANY(SELECT student_id FROM Attendance WHERE attendance_num < 70) AND student_name LIKE 'A%';
+
+SELECT student_name, student_surname, s_email, student_year, Major.major_name
+FROM Student
+INNER JOIN Major
+ON student_id = ANY( SELECT student_id FROM Warn WHERE student_id != -1 ) AND Major.major_id=Student.major_id
